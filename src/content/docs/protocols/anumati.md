@@ -14,8 +14,9 @@ callee's terms of service. Auth policy (OAuth scopes, RBAC) governs **who**
 may call **which** endpoint. Usage policy governs **how** and **under what
 conditions** a permitted action may be taken.
 
-Under UETA §14, the human principal is legally bound by whatever terms
-their agent accepts, without necessarily being aware. ACAP closes this gap.
+Under [UETA §14](https://www.uniformlaws.org/), the human principal is
+legally bound by whatever terms their agent accepts, without
+necessarily being aware. ACAP closes this gap.
 
 ## Three Primitives
 

@@ -17,6 +17,7 @@ export default defineConfig({
 					label: 'Protocols',
 					items: [
 						{ label: 'Anumati / ACAP (Consent)', slug: 'protocols/anumati' },
+						{ label: 'ACAP Extensions', slug: 'protocols/acap-extensions' },
 						{ label: 'Phala (Welfare)', slug: 'protocols/phala' },
 						{ label: 'Pratyahara / NERVE (Integrity)', slug: 'protocols/pratyahara' },
 						{ label: 'Sauvidya / PACE (Accessibility)', slug: 'protocols/sauvidya' },

@@ -57,6 +57,18 @@ action. Integrity monitors the action. Welfare evaluates the result.
 The result feeds back into trust (NERVE myelination) and future routing
 (Phala BeliefUpdate), closing the loop.
 
+### ACAP Extensions
+
+ACAP carries four reference extensions that layer specific deployment
+concerns onto the Core chain without modifying it:
+[governance tiering, category preferences, regulatory context, and
+audit projection](/agent-protocol-stack/protocols/acap-extensions/).
+The extensions compose in turn: category preferences defines the
+(category, dimension) grid, regulatory context enforces jurisdictional
+floors on the same grid, governance tiering consults the effective
+floor when classifying a re-consent diff, and audit projection
+renders the full trail into a regulator-facing report.
+
 ## On the AgentCard
 
 All four protocols declare themselves in the same `capabilities.extensions`
