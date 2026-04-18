@@ -1,0 +1,32 @@
+---
+title: Agent Protocol Stack
+description: Four protocol extensions for accountable, accessible, and welfare-aware autonomous agent networks.
+template: splash
+hero:
+  tagline: Four independent, composable protocol extensions for the A2A and MCP agent stack. Each addresses a structural gap that current protocols leave open.
+  actions:
+    - text: Read the Overview
+      link: /agent-protocol-stack/overview/
+      icon: right-arrow
+    - text: GitHub
+      link: https://github.com/ravikiran438
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+  <Card title="Anumati / ACAP" icon="approve-check">
+    **Consent and Adherence.** Per-clause usage-policy evaluation with proof of adherence, not just proof of acceptance. [Read more →](/agent-protocol-stack/protocols/anumati/)
+  </Card>
+  <Card title="Phala" icon="star">
+    **Welfare Feedback.** Principal-declared outcome quality routed back through the agent network. The principal defines what good means. [Read more →](/agent-protocol-stack/protocols/phala/)
+  </Card>
+  <Card title="Pratyahara / NERVE" icon="warning">
+    **Behavioral Integrity.** Real-time drift detection, collusion detection, and network-level health monitoring for compromised agents. [Read more →](/agent-protocol-stack/protocols/pratyahara/)
+  </Card>
+  <Card title="Sauvidya / PACE" icon="heart">
+    **Accessibility.** Principal capability profiling, adapted interaction modalities, and consent capacity checks for vulnerable populations. [Read more →](/agent-protocol-stack/protocols/sauvidya/)
+  </Card>
+</CardGrid>
