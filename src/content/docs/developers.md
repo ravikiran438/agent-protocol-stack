@@ -112,21 +112,87 @@ repos; each stays independently installable with no shared package.
 
 ### Install
 
-From inside each repository:
+Two paths depending on whether you are consuming or contributing.
+
+**For end users (no clone, ephemeral with `uvx`):**
 
 ```bash
+uvx --from 'acap[mcp] @ git+https://github.com/ravikiran438/agent-consent-protocol.git@v0.1.0' acap-mcp
+uvx --from 'phala[mcp] @ git+https://github.com/ravikiran438/phala-protocol.git@v0.1.0' phala-mcp
+uvx --from 'nerve[mcp] @ git+https://github.com/ravikiran438/pratyahara-nerve.git@v0.1.0' nerve-mcp
+uvx --from 'pace[mcp] @ git+https://github.com/ravikiran438/sauvidya-pace.git@v0.1.0' pace-mcp
+```
+
+**For end users (persistent, into an existing venv):**
+
+```bash
+pip install 'acap[mcp] @ git+https://github.com/ravikiran438/agent-consent-protocol.git@v0.1.0'
+# substitute phala/nerve/pace as needed
+```
+
+**For contributors (clone + editable install):**
+
+```bash
+git clone https://github.com/ravikiran438/agent-consent-protocol.git
+cd agent-consent-protocol
 pip install -e '.[mcp]'
 ```
 
-This installs the MCP Python SDK alongside the protocol package and
-registers the console script. The same pattern works in all four
-repos.
+Any of the three paths registers the appropriate `<name>-mcp` console
+script in the active Python environment.
 
 ### VSCode MCP config
 
 Add this to `.vscode/mcp.json` at your workspace root (or configure
 globally via your VSCode user settings, under the MCP section). Only
-include the servers you need:
+include the servers you need.
+
+**Option A — `uvx` from git URLs (no persistent install required):**
+
+```json
+{
+  "servers": {
+    "acap": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "acap[mcp] @ git+https://github.com/ravikiran438/agent-consent-protocol.git@v0.1.0",
+        "acap-mcp"
+      ]
+    },
+    "phala": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "phala[mcp] @ git+https://github.com/ravikiran438/phala-protocol.git@v0.1.0",
+        "phala-mcp"
+      ]
+    },
+    "nerve": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "nerve[mcp] @ git+https://github.com/ravikiran438/pratyahara-nerve.git@v0.1.0",
+        "nerve-mcp"
+      ]
+    },
+    "pace": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "pace[mcp] @ git+https://github.com/ravikiran438/sauvidya-pace.git@v0.1.0",
+        "pace-mcp"
+      ]
+    }
+  }
+}
+```
+
+**Option B — absolute paths to pre-installed binaries:**
 
 ```json
 {
