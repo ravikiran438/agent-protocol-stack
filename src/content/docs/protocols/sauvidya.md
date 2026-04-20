@@ -60,4 +60,5 @@ PACE works standalone. When deployed alongside other protocols:
 - **Repository:** [github.com/ravikiran438/sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace)
 - **Extension URI:** `https://github.com/ravikiran438/sauvidya-pace/v1`
 - **Tests:** 32 passing
+- **MCP server:** `pace-mcp` (see [MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers))
 - **License:** Apache 2.0

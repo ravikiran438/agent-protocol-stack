@@ -42,4 +42,5 @@ version-gated re-acceptance, and the no-disputed-permit invariant.
 - **Repository:** [github.com/ravikiran438/agent-consent-protocol](https://github.com/ravikiran438/agent-consent-protocol)
 - **Extension URI:** `https://github.com/ravikiran438/agent-consent-protocol/v1`
 - **Tests:** 35 passing
+- **MCP server:** `acap-mcp` (see [MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers))
 - **License:** Apache 2.0

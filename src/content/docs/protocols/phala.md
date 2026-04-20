@@ -38,4 +38,5 @@ substitute its own formula.
 - **Repository:** [github.com/ravikiran438/phala-protocol](https://github.com/ravikiran438/phala-protocol)
 - **Extension URI:** `https://github.com/ravikiran438/phala-protocol/v1`
 - **Tests:** 10 passing
+- **MCP server:** `phala-mcp` (see [MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers))
 - **License:** Apache 2.0

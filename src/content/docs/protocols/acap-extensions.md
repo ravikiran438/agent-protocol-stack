@@ -166,3 +166,13 @@ The four extensions stack deliberately:
 4. **Audit Projection** renders the full history into a regulator-facing report; the `AuditEntryType` enum already reserves `GOVERNANCE_AUTO`, `GOVERNANCE_REVIEWED`, and `HUMAN_REVIEW` entries so a deployment that layers governance-tiering can surface those decisions in the timeline.
 
 The Core paper at [Zenodo DOI 10.5281/zenodo.19606339](https://doi.org/10.5281/zenodo.19606339) specifies the three primitives these extensions build on. Extensions are maintained in the same repository and do not currently carry individual DOIs.
+
+## MCP Server
+
+One primary entry point per extension ships as an MCP tool alongside
+the Core validators, via the `acap-mcp` reference server: `classify_policy_bump` (governance tiering),
+`resolve_sensitivity` (category preferences), `compute_floor`
+(regulatory context), `generate_audit_report` and
+`validate_audit_report` (audit projection). See
+[MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers)
+for install and VSCode configuration.

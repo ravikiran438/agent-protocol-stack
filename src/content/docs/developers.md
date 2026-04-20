@@ -70,11 +70,12 @@ An agent can declare any subset. A deployment that only needs consent:
 Agents that do not understand an extension ignore the entry. No error,
 no failure, no negotiation. The extensions are additive.
 
-## MCP Integration
+## Advertising Protocol Support in an MCP Handshake
 
-For MCP tool servers, each protocol registers as a custom server
-capability in the `serverCapabilities` object during the `initialize`
-handshake, keyed by the same extension URI:
+For MCP tool servers whose agent supports one or more of the four
+protocols, each protocol registers as a custom server capability in
+the `serverCapabilities` object during the `initialize` handshake,
+keyed by the same extension URI used on the A2A AgentCard:
 
 ```json
 {
@@ -93,16 +94,89 @@ handshake, keyed by the same extension URI:
 }
 ```
 
+## MCP Reference Servers
+
+Each protocol ships a reference [Model Context Protocol](https://modelcontextprotocol.io/)
+server that exposes its validators as MCP tools. All four use stdio
+transport and work with any MCP-compatible client; the configuration
+below uses VSCode's native MCP settings, and the same console script
+binds to any stdio-capable host. The pattern is identical across
+repos; each stays independently installable with no shared package.
+
+| Protocol | Console script | Tools exposed | Purpose |
+|---|---|---|---|
+| ACAP | `acap-mcp` | 8 | Core validators + one primary entry point per extension (governance tiering, category preferences, regulatory context, audit projection) |
+| Phala | `phala-mcp` | 6 | The five primitive validators plus the BU-Privacy invariant check |
+| NERVE | `nerve-mcp` | 10 | Seven Core safety invariants (N-1, N-3, N-4, N-5, N-9, N-14, N-15) plus three Yathartha extension invariants (N-16, N-17, N-18) for capability-surface integrity |
+| PACE | `pace-mcp` | 6 | The six named accessibility invariants (IM-1, IM-2, CCC-1, CCC-2, AIC-1, AIC-2) |
+
+### Install
+
+From inside each repository:
+
+```bash
+pip install -e '.[mcp]'
+```
+
+This installs the MCP Python SDK alongside the protocol package and
+registers the console script. The same pattern works in all four
+repos.
+
+### VSCode MCP config
+
+Add this to `.vscode/mcp.json` at your workspace root (or configure
+globally via your VSCode user settings, under the MCP section). Only
+include the servers you need:
+
+```json
+{
+  "servers": {
+    "acap": {
+      "type": "stdio",
+      "command": "/absolute/path/to/agent-consent-protocol/.venv/bin/acap-mcp"
+    },
+    "phala": {
+      "type": "stdio",
+      "command": "/absolute/path/to/phala-protocol/.venv/bin/phala-mcp"
+    },
+    "nerve": {
+      "type": "stdio",
+      "command": "/absolute/path/to/pratyahara-nerve/.venv/bin/nerve-mcp"
+    },
+    "pace": {
+      "type": "stdio",
+      "command": "/absolute/path/to/sauvidya-pace/.venv/bin/pace-mcp"
+    }
+  }
+}
+```
+
+Reload the workspace. The tools appear in any MCP-aware VSCode
+extension grouped by server name. Other MCP hosts accept the same
+console-script paths under their own configuration conventions.
+
+### Tool-naming convention
+
+Every tool is named `validate_<invariant>` and takes a JSON payload
+of the primitive(s) it operates on. Output is a JSON object with
+`{"ok": true, ...}` on success or `{"ok": false, "error": "..."}` on
+invariant failure. A malformed input (not a structural invariant
+failure) surfaces as an MCP protocol error rather than an `ok=false`
+response.
+
+See each server's `src/<package>/mcp_server/README.md` for the full
+tool schema and per-tool examples.
+
 ## Companion Repositories
 
 | Protocol | Package | Tests | TLA+ |
 |---|---|---|---|
-| ACAP | [agent-consent-protocol](https://github.com/ravikiran438/agent-consent-protocol) | 35 | Full state machine |
-| Phala | [phala-protocol](https://github.com/ravikiran438/phala-protocol) | 10 | Skeleton |
-| NERVE | [pratyahara-nerve](https://github.com/ravikiran438/pratyahara-nerve) | 39 | Full state machine |
-| PACE | [sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace) | 32 | Full state machine |
+| ACAP | [agent-consent-protocol](https://github.com/ravikiran438/agent-consent-protocol) | 128 (Core + 4 extensions + MCP) | Full state machine |
+| Phala | [phala-protocol](https://github.com/ravikiran438/phala-protocol) | 27 (Core + MCP) | Skeleton |
+| NERVE | [pratyahara-nerve](https://github.com/ravikiran438/pratyahara-nerve) | 94 (Core + Yathartha + MCP) | Full state machine (Core + Yathartha) |
+| PACE | [sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace) | 55 (Core + MCP) | Full state machine |
 
-Total: **116 tests** across the stack.
+Total: **304 tests** across the stack.
 
 ## Papers
 
@@ -112,3 +186,4 @@ Total: **116 tests** across the stack.
 | Phala | [10.5281/zenodo.19625612](https://doi.org/10.5281/zenodo.19625612) |
 | Pratyahara / NERVE | [10.5281/zenodo.19628589](https://doi.org/10.5281/zenodo.19628589) |
 | Sauvidya / PACE | [10.5281/zenodo.19633139](https://doi.org/10.5281/zenodo.19633139) |
+| Yathartha (NERVE extension) | [10.5281/zenodo.19659633](https://doi.org/10.5281/zenodo.19659633) |
