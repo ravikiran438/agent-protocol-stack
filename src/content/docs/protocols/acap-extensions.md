@@ -165,7 +165,7 @@ The four extensions stack deliberately:
 3. **Governance Tiering** consults the effective floor when classifying a re-consent diff; a `HIGH` cell is a candidate for automatic `HUMAN_REQUIRED` escalation regardless of the structural signals on the diff.
 4. **Audit Projection** renders the full history into a regulator-facing report; the `AuditEntryType` enum already reserves `GOVERNANCE_AUTO`, `GOVERNANCE_REVIEWED`, and `HUMAN_REVIEW` entries so a deployment that layers governance-tiering can surface those decisions in the timeline.
 
-The Core paper at [Zenodo DOI 10.5281/zenodo.19606339](https://doi.org/10.5281/zenodo.19606339) specifies the three primitives these extensions build on. Extensions are maintained in the same repository and do not currently carry individual DOIs.
+The Core paper at [arXiv:2604.16524](https://arxiv.org/abs/2604.16524) (also [Zenodo DOI 10.5281/zenodo.19606339](https://doi.org/10.5281/zenodo.19606339)) specifies the three primitives these extensions build on. Extensions are maintained in the same repository and do not currently carry individual DOIs.
 
 ## MCP Server
 

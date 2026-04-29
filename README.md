@@ -19,7 +19,7 @@ developers adopting one or more of the four protocols.
 
 | Protocol | Repository | Paper |
 |---|---|---|
-| ACAP | [agent-consent-protocol](https://github.com/ravikiran438/agent-consent-protocol) | [10.5281/zenodo.19606339](https://doi.org/10.5281/zenodo.19606339) |
+| ACAP | [agent-consent-protocol](https://github.com/ravikiran438/agent-consent-protocol) | [arXiv:2604.16524](https://arxiv.org/abs/2604.16524) · [Zenodo 10.5281/zenodo.19606339](https://doi.org/10.5281/zenodo.19606339) |
 | Phala | [phala-protocol](https://github.com/ravikiran438/phala-protocol) | [10.5281/zenodo.19625612](https://doi.org/10.5281/zenodo.19625612) |
 | NERVE | [pratyahara-nerve](https://github.com/ravikiran438/pratyahara-nerve) | [10.5281/zenodo.19628589](https://doi.org/10.5281/zenodo.19628589) |
 | PACE | [sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace) | [10.5281/zenodo.19633139](https://doi.org/10.5281/zenodo.19633139) |

@@ -248,7 +248,7 @@ Total: **386 tests** across the stack.
 
 | Protocol | DOI |
 |---|---|
-| Anumati / ACAP | [10.5281/zenodo.19606339](https://doi.org/10.5281/zenodo.19606339) |
+| Anumati / ACAP | [arXiv:2604.16524](https://arxiv.org/abs/2604.16524) · [Zenodo 10.5281/zenodo.19606339](https://doi.org/10.5281/zenodo.19606339) |
 | Phala | [10.5281/zenodo.19625612](https://doi.org/10.5281/zenodo.19625612) |
 | Pratyahara / NERVE | [10.5281/zenodo.19628589](https://doi.org/10.5281/zenodo.19628589) |
 | Sauvidya / PACE | [10.5281/zenodo.19633139](https://doi.org/10.5281/zenodo.19633139) |
