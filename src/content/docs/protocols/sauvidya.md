@@ -54,11 +54,43 @@ PACE works standalone. When deployed alongside other protocols:
   accessible. A voice confirmation in Telugu replaces a payment-detail
   screen the principal cannot read.
 
+## Augmentation Profile Extension
+
+The [augmentation_profile extension](https://github.com/ravikiran438/sauvidya-pace/tree/main/extensions/augmentation_profile)
+extends PACE from defensive accommodation toward active prosthetic
+augmentation. PACE Core declares what the principal can do and adapts
+the agent's interaction surface to fit. The extension adds the
+missing piece: how an agent *actively replaces* missing capacity or
+*amplifies* existing strengths, with contractual safeguards against
+skill atrophy, identity erosion, and missed-emergency risk.
+
+| Primitive | What it records |
+|---|---|
+| `AugmentationAxis` | A single dimension with kind: `compensate`, `amplify`, or `preserve` |
+| `AugmentationProfile` | Per-principal declaration with reversibility, audit, identity, skill-maintenance, and emergency rules |
+| `AugmentationAction` | A logged action with a `mediation` field distinguishing agent-compensated, agent-amplified, user-direct, and agent-handed-off |
+| `EmergencyTrigger` / `HandoffEvent` | Declared crisis conditions and the typed handoff event that follows |
+| `AxisRevertedEvent` | Typed reversion event recording principal opt-out of any axis |
+
+| Invariant | Purpose |
+|---|---|
+| AUG-1 Reversibility | Every augmentation is revertible by the principal as a typed event |
+| AUG-2 Audit Decomposition | Every action records its mediation (no aggregation that erases agency) |
+| AUG-3 Identity Preservation | Voice/style alteration requires explicit `identity_consent` |
+| AUG-4 Skill Maintenance | `preserve` axes are never replaced by agent action |
+| AUG-5 Emergency Boundary | Triggers force human handoff; no further agent action until acknowledgement |
+
+Full specification with TLA+ model and TLC configuration at
+[`extensions/augmentation_profile/`](https://github.com/ravikiran438/sauvidya-pace/tree/main/extensions/augmentation_profile).
+The extension is additive: agents that do not declare an
+`AugmentationProfile` continue to operate under PACE Core's existing
+defensive-accommodation model.
+
 ## Links
 
 - **Paper:** [Zenodo DOI 10.5281/zenodo.19633139](https://doi.org/10.5281/zenodo.19633139)
 - **Repository:** [github.com/ravikiran438/sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace)
 - **Extension URI:** `https://github.com/ravikiran438/sauvidya-pace/v1`
-- **Tests:** 32 passing
-- **MCP server:** `pace-mcp` (see [MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers))
+- **Tests:** 96 passing (Core + augmentation_profile + MCP)
+- **MCP server:** `pace-mcp` — 11 tools (7 Core + 4 augmentation_profile); see [MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers)
 - **License:** Apache 2.0

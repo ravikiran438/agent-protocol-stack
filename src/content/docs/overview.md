@@ -8,7 +8,7 @@ description: The structural gaps in the agent protocol stack and the four extens
 The Agent2Agent (A2A) protocol governs how agents discover, authenticate,
 and exchange tasks with each other. The Model Context Protocol (MCP) governs
 how agents call tools and interpret results. Neither governs what happens
-at three critical boundaries:
+at four critical boundaries:
 
 1. **The policy boundary.** A2A's AgentCard describes what an agent *can* do.
    It has no mechanism for what calling agents *are permitted to do* under

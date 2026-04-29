@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ravikiran438.github.io/agent-protocol-stack/sitemap-index.xml
+Sitemap: https://ravikiran438.github.io/agent-protocol-stack/sitemap-0.xml

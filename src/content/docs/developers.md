@@ -106,9 +106,9 @@ repos; each stays independently installable with no shared package.
 | Protocol | Console script | Tools exposed | Purpose |
 |---|---|---|---|
 | ACAP | `acap-mcp` | 8 | Core validators + one primary entry point per extension (governance tiering, category preferences, regulatory context, audit projection) |
-| Phala | `phala-mcp` | 6 | The five primitive validators plus the BU-Privacy invariant check |
+| Phala | `phala-mcp` | 11 | Six Core validators (five primitives + BU-Privacy) plus five welfare_detectors extension validators: TypedBeliefUpdate structural check, WD-1 typed composition, WD-2 arbitration, WD-3 horizon, WD-4 provenance. BU-2 (per-agent uniqueness) and BU-4 (TTL expiry) are runtime-enforced and not exposed via MCP — they require state (a set of updates) or wall-clock time that an MCP tool boundary doesn't naturally carry. |
 | NERVE | `nerve-mcp` | 10 | Seven Core safety invariants (N-1, N-3, N-4, N-5, N-9, N-14, N-15) plus three Yathartha extension invariants (N-16, N-17, N-18) for capability-surface integrity |
-| PACE | `pace-mcp` | 6 | The six named accessibility invariants (IM-1, IM-2, CCC-1, CCC-2, AIC-1, AIC-2) |
+| PACE | `pace-mcp` | 11 | Seven Core validators: PCP structural check plus six named accessibility invariants (IM-1, IM-2, CCC-1, CCC-2, AIC-1, AIC-2). Plus four augmentation_profile extension validators (AUG-1 reversibility, AUG-3 identity, AUG-4 skill maintenance, AUG-5 emergency boundary). AUG-2 is omitted because audit decomposition is enforced at type construction by the `Mediation` enum, leaving no separate runtime check to expose. |
 
 ### Install
 
@@ -238,11 +238,11 @@ tool schema and per-tool examples.
 | Protocol | Package | Tests | TLA+ |
 |---|---|---|---|
 | ACAP | [agent-consent-protocol](https://github.com/ravikiran438/agent-consent-protocol) | 128 (Core + 4 extensions + MCP) | Full state machine |
-| Phala | [phala-protocol](https://github.com/ravikiran438/phala-protocol) | 27 (Core + MCP) | Skeleton |
+| Phala | [phala-protocol](https://github.com/ravikiran438/phala-protocol) | 68 (Core + welfare_detectors + MCP) | Core skeleton + welfare_detectors spec |
 | NERVE | [pratyahara-nerve](https://github.com/ravikiran438/pratyahara-nerve) | 94 (Core + Yathartha + MCP) | Full state machine (Core + Yathartha) |
-| PACE | [sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace) | 55 (Core + MCP) | Full state machine |
+| PACE | [sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace) | 96 (Core + augmentation_profile + MCP) | Full state machine + augmentation_profile spec |
 
-Total: **304 tests** across the stack.
+Total: **386 tests** across the stack.
 
 ## Papers
 
