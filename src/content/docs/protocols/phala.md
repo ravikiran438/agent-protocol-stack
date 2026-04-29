@@ -38,10 +38,10 @@ The [welfare_detectors extension](https://github.com/ravikiran438/phala-protocol
 adds a typed panel of specialized welfare detectors with deterministic
 arbitration and a predictive welfare horizon. Phala Core's single
 `BeliefUpdate` channel collapses every welfare dimension into one
-scalar weight delta. For elderly, autistic, or cognitively impaired
-principals, the relevant welfare dimensions (cognitive load, autonomy,
-dignity, social connection, pace) routinely conflict and a single
-scalar loses the information the agent needs to act well.
+scalar weight delta. The relevant welfare dimensions (cognitive load,
+autonomy, dignity, social connection, pace) routinely conflict, and a
+single scalar loses the information the agent needs to act well — most
+acutely for elderly, autistic, or cognitively impaired principals.
 
 | Primitive | What it records |
 |---|---|
