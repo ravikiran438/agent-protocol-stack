@@ -16,22 +16,22 @@ array:
   "capabilities": {
     "extensions": [
       {
-        "uri": "https://github.com/ravikiran438/agent-consent-protocol/v1",
+        "uri": "https://ravikiran438.github.io/agent-consent-protocol/v1",
         "description": "ACAP: usage-policy consent and per-action adherence.",
         "required": true
       },
       {
-        "uri": "https://github.com/ravikiran438/phala-protocol/v1",
+        "uri": "https://ravikiran438.github.io/phala-protocol/v1",
         "description": "Phala: principal-declared welfare feedback.",
         "required": false
       },
       {
-        "uri": "https://github.com/ravikiran438/pratyahara-nerve/v1",
+        "uri": "https://ravikiran438.github.io/pratyahara-nerve/v1",
         "description": "NERVE: behavioral integrity monitoring.",
         "required": true
       },
       {
-        "uri": "https://github.com/ravikiran438/sauvidya-pace/v1",
+        "uri": "https://ravikiran438.github.io/sauvidya-pace/v1",
         "description": "PACE: principal accessibility and capacity.",
         "required": true
       }
@@ -58,7 +58,7 @@ An agent can declare any subset. A deployment that only needs consent:
   "capabilities": {
     "extensions": [
       {
-        "uri": "https://github.com/ravikiran438/agent-consent-protocol/v1",
+        "uri": "https://ravikiran438.github.io/agent-consent-protocol/v1",
         "description": "ACAP: usage-policy consent and per-action adherence.",
         "required": true
       }
@@ -81,12 +81,12 @@ keyed by the same extension URI used on the A2A AgentCard:
 {
   "serverCapabilities": {
     "tools": {},
-    "https://github.com/ravikiran438/pratyahara-nerve/v1": {
+    "https://ravikiran438.github.io/pratyahara-nerve/v1": {
       "neuron_type": "processing",
       "behavioral_fingerprint": "sha256:...",
       "trust_score": 0.88
     },
-    "https://github.com/ravikiran438/sauvidya-pace/v1": {
+    "https://ravikiran438.github.io/sauvidya-pace/v1": {
       "supported_modalities": ["voice", "text"],
       "supported_languages": ["en", "te", "hi"]
     }
@@ -105,10 +105,10 @@ repos; each stays independently installable with no shared package.
 
 | Protocol | Console script | Tools exposed | Purpose |
 |---|---|---|---|
-| ACAP | `acap-mcp` | 8 | Core validators + one primary entry point per extension (governance tiering, category preferences, regulatory context, audit projection) |
-| Phala | `phala-mcp` | 11 | Six Core validators (five primitives + BU-Privacy) plus five welfare_detectors extension validators: TypedBeliefUpdate structural check, WD-1 typed composition, WD-2 arbitration, WD-3 horizon, WD-4 provenance. BU-2 (per-agent uniqueness) and BU-4 (TTL expiry) are runtime-enforced and not exposed via MCP — they require state (a set of updates) or wall-clock time that an MCP tool boundary doesn't naturally carry. |
-| NERVE | `nerve-mcp` | 10 | Seven Core safety invariants (N-1, N-3, N-4, N-5, N-9, N-14, N-15) plus three Yathartha extension invariants (N-16, N-17, N-18) for capability-surface integrity |
-| PACE | `pace-mcp` | 11 | Seven Core validators: PCP structural check plus six named accessibility invariants (IM-1, IM-2, CCC-1, CCC-2, AIC-1, AIC-2). Plus four augmentation_profile extension validators (AUG-1 reversibility, AUG-3 identity, AUG-4 skill maintenance, AUG-5 emergency boundary). AUG-2 is omitted because audit decomposition is enforced at type construction by the `Mediation` enum, leaving no separate runtime check to expose. |
+| ACAP | `acap-mcp` | 9 | Core validators + one primary entry point per extension (governance tiering, category preferences, regulatory context, audit projection), plus `validate_usage_policy_ref` for AgentCard payload validation. |
+| Phala | `phala-mcp` | 12 | Six Core validators (five primitives + BU-Privacy) plus five welfare_detectors extension validators: TypedBeliefUpdate structural check, WD-1 typed composition, WD-2 arbitration, WD-3 horizon, WD-4 provenance. Plus `validate_phala_service_ref` for AgentCard payload validation. BU-2 (per-agent uniqueness) and BU-4 (TTL expiry) are runtime-enforced and not exposed via MCP — they require state (a set of updates) or wall-clock time that an MCP tool boundary doesn't naturally carry. |
+| NERVE | `nerve-mcp` | 13 | Seven Core safety invariants (N-1, N-3, N-4, N-5, N-9, N-14, N-15) plus three Yathartha extension invariants (N-16, N-17, N-18) for capability-surface integrity. Plus three AgentCard / wire validators: `validate_neural_posture_ref`, `validate_nerve_envelope`, `validate_behavioral_fingerprint`. |
+| PACE | `pace-mcp` | 16 | Seven Core validators: PCP structural check plus six named accessibility invariants (IM-1, IM-2, CCC-1, CCC-2, AIC-1, AIC-2). Plus four augmentation_profile extension validators (AUG-1 reversibility, AUG-3 identity, AUG-4 skill maintenance, AUG-5 emergency boundary). Plus five wire validators introduced in PACE v3: `validate_accessibility_service_ref`, `validate_active_challenge`, `validate_pace_consent_annotation`, `validate_pace_violation_notice`, `compute_ccc_trend`. AUG-2 is omitted because audit decomposition is enforced at type construction by the `Mediation` enum, leaving no separate runtime check to expose. |
 
 ### Install
 

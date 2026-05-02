@@ -40,7 +40,7 @@ version-gated re-acceptance, and the no-disputed-permit invariant.
 
 - **Paper:** [arXiv:2604.16524](https://arxiv.org/abs/2604.16524) · also on [Zenodo (DOI 10.5281/zenodo.19606339)](https://doi.org/10.5281/zenodo.19606339)
 - **Repository:** [github.com/ravikiran438/agent-consent-protocol](https://github.com/ravikiran438/agent-consent-protocol)
-- **Extension URI:** `https://github.com/ravikiran438/agent-consent-protocol/v1`
+- **Extension URI:** `https://ravikiran438.github.io/agent-consent-protocol/v1`
 - **Tests:** 35 passing
 - **MCP server:** `acap-mcp` (see [MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers))
 - **License:** Apache 2.0

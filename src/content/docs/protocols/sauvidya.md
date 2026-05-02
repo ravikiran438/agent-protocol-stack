@@ -90,7 +90,7 @@ defensive-accommodation model.
 
 - **Paper:** [Zenodo DOI 10.5281/zenodo.19633139](https://doi.org/10.5281/zenodo.19633139)
 - **Repository:** [github.com/ravikiran438/sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace)
-- **Extension URI:** `https://github.com/ravikiran438/sauvidya-pace/v1`
+- **Extension URI:** `https://ravikiran438.github.io/sauvidya-pace/v1`
 - **Tests:** 96 passing (Core + augmentation_profile + MCP)
 - **MCP server:** `pace-mcp` — 11 tools (7 Core + 4 augmentation_profile); see [MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers)
 - **License:** Apache 2.0

@@ -91,7 +91,7 @@ single-fingerprint drift model.
 
 - **Paper:** [Zenodo DOI 10.5281/zenodo.19628589](https://doi.org/10.5281/zenodo.19628589)
 - **Repository:** [github.com/ravikiran438/pratyahara-nerve](https://github.com/ravikiran438/pratyahara-nerve)
-- **Extension URI:** `https://github.com/ravikiran438/pratyahara-nerve/v1`
+- **Extension URI:** `https://ravikiran438.github.io/pratyahara-nerve/v1`
 - **Tests:** 94 passing (Core + Yathartha + MCP)
 - **MCP server:** `nerve-mcp` — 10 tools (7 Core + 3 Yathartha); see [MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers)
 - **License:** Apache 2.0

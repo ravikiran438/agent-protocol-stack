@@ -68,7 +68,7 @@ continue to operate under Phala Core's existing single-channel
 
 - **Paper:** [Zenodo DOI 10.5281/zenodo.19625612](https://doi.org/10.5281/zenodo.19625612)
 - **Repository:** [github.com/ravikiran438/phala-protocol](https://github.com/ravikiran438/phala-protocol)
-- **Extension URI:** `https://github.com/ravikiran438/phala-protocol/v1`
+- **Extension URI:** `https://ravikiran438.github.io/phala-protocol/v1`
 - **Tests:** 68 passing (Core + welfare_detectors + MCP)
 - **MCP server:** `phala-mcp` — 11 tools (6 Core + 5 welfare_detectors); see [MCP Reference Servers](/agent-protocol-stack/developers/#mcp-reference-servers)
 - **License:** Apache 2.0

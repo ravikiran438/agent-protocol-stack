@@ -25,6 +25,7 @@ export default defineConfig({
 				},
 				{ label: 'How They Compose', slug: 'composition' },
 				{ label: 'For A2A Developers', slug: 'developers' },
+				{ label: 'Extension Manifest Convention', slug: 'manifest-convention' },
 			],
 		}),
 	],
