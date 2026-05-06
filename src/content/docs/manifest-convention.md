@@ -103,11 +103,13 @@ emits the full envelope.
 ### 1. Install the testbed
 
 ```sh
-pip install a2a-testbed
-# or, for a clone-and-run workflow:
 git clone https://github.com/ravikiran438/a2a-testbed.git
 cd a2a-testbed && pip install -e ".[test]"
 ```
+
+Source install only; the package is not yet published to PyPI.
+The live playground at <https://a2a-testbed.com> performs the
+same validation in the browser without a local install.
 
 ### 2. Author a Pydantic model for the AgentCard payload
 
@@ -187,8 +189,8 @@ it without protocol-specific code:
 a2a-testbed validate path/to/agent-card.json --allow-fetch
 ```
 
-Or in the browser via the [playground](https://github.com/ravikiran438/a2a-testbed/tree/main/playground)'s
-"Validate AgentCard" mode.
+The live playground at <https://a2a-testbed.com> performs the same
+validation in the browser via the **Validator** mode.
 
 ### What the manifest envelope looks like
 

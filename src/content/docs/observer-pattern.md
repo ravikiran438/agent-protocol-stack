@@ -15,7 +15,10 @@ leaves the assembly to deployment.
 This page explains the gap, the assembly costs of the spec's
 minimalist approach, and the observer pattern as one ergonomic way
 to fill it for scenario testing and (with different infrastructure)
-for production.
+for production. The reference implementation is part of
+[a2a-testbed](https://github.com/ravikiran438/a2a-testbed); the
+live playground at <https://a2a-testbed.com> renders the bundled
+three-party scenario with the observer toggle visible.
 
 ## What it is, in plain terms
 
@@ -235,11 +238,18 @@ testbed gives you the wire-level traffic tap to plug it into.
 
 ## Where to look in the testbed code
 
-- `src/a2a_testbed/core/observer.py` — `ObserverHub`,
-  `TrafficRecord`, `WireExchange`
-- `examples/scenarios/observer_audit.yaml` — minimal demo
-- The multi-tenant network's request-handler tap is where wire
-  exchanges get forwarded to the hub.
+Implementation files in the
+[a2a-testbed](https://github.com/ravikiran438/a2a-testbed) repo:
+
+- [`src/a2a_testbed/core/observer.py`](https://github.com/ravikiran438/a2a-testbed/blob/main/src/a2a_testbed/core/observer.py) —
+  `ObserverHub`, `TrafficRecord`, `WireExchange`
+- [`examples/scenarios/observer_audit.yaml`](https://github.com/ravikiran438/a2a-testbed/blob/main/examples/scenarios/observer_audit.yaml) —
+  minimal demonstration scenario
+- [`src/a2a_testbed/network/multitenant.py`](https://github.com/ravikiran438/a2a-testbed/blob/main/src/a2a_testbed/network/multitenant.py) —
+  request-handler tap that forwards wire exchanges to the hub
+
+The live playground at <https://a2a-testbed.com> renders the
+pattern interactively: Scenario mode, **Add Observer** toggle.
 
 ## Net summary
 
