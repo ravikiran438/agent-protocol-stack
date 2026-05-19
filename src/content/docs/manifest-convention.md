@@ -29,7 +29,7 @@ whether the convention generalizes.
 
 ## Live reference manifests
 
-The four protocols in this stack each publish a manifest at the URI
+The five protocols in this stack each publish a manifest at the URI
 each agent declares. Anyone with a JSON-Schema validator can fetch
 these directly:
 
@@ -39,6 +39,7 @@ these directly:
 | Phala | [`/phala-protocol/v1/manifest.json`](https://ravikiran438.github.io/phala-protocol/v1/manifest.json) |
 | NERVE | [`/pratyahara-nerve/v1/manifest.json`](https://ravikiran438.github.io/pratyahara-nerve/v1/manifest.json) |
 | PACE | [`/sauvidya-pace/v1/manifest.json`](https://ravikiran438.github.io/sauvidya-pace/v1/manifest.json) |
+| Pramana | [`/pramana-attestation/v1/manifest.json`](https://ravikiran438.github.io/pramana-attestation/v1/manifest.json) |
 
 Sub-extensions follow the same pattern at `<protocol-uri>/extensions/<name>/v1/manifest.json`. Every URI in the table above is self-consistent: the manifest's
 `extension.uri` field equals the URL it was fetched from.

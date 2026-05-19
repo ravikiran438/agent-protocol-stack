@@ -1,12 +1,12 @@
 ---
 title: For A2A Developers
-description: How to declare all four protocol extensions on a single AgentCard.
+description: How to declare the protocol extensions on a single AgentCard.
 ---
 
-## AgentCard with All Four Extensions
+## AgentCard with All Extensions
 
-All four protocols use the standard A2A `capabilities.extensions`
-mechanism. An agent that supports all four declares them in a single
+All five protocols use the standard A2A `capabilities.extensions`
+mechanism. An agent that supports all five declares them in a single
 array:
 
 ```json
@@ -34,6 +34,11 @@ array:
         "uri": "https://ravikiran438.github.io/sauvidya-pace/v1",
         "description": "PACE: principal accessibility and capacity.",
         "required": true
+      },
+      {
+        "uri": "https://ravikiran438.github.io/pramana-attestation/v1",
+        "description": "Pramana: per-output ClaimAttestation with deterministic verification.",
+        "required": false
       }
     ]
   }
@@ -48,6 +53,7 @@ array:
 | Phala | `false` | Welfare feedback is advisory (BU-3: agents MAY ignore BeliefUpdates) |
 | NERVE | `true` | Security layer: callee expects callers to participate in the trust envelope |
 | PACE | `true` | Agents serving principals with registered PCPs MUST adapt interaction |
+| Pramana | `false` | Verification artifacts are deployment-specific; regulated deployments (CFPB, NYDFS, §1557) set this to `true`, general-purpose deployments leave it advisory |
 
 ### Agents that support fewer protocols
 
@@ -72,7 +78,7 @@ no failure, no negotiation. The extensions are additive.
 
 ## Advertising Protocol Support in an MCP Handshake
 
-For MCP tool servers whose agent supports one or more of the four
+For MCP tool servers whose agent supports one or more of these
 protocols, each protocol registers as a custom server capability in
 the `serverCapabilities` object during the `initialize` handshake,
 keyed by the same extension URI used on the A2A AgentCard:
@@ -97,8 +103,11 @@ keyed by the same extension URI used on the A2A AgentCard:
 ## MCP Reference Servers
 
 Each protocol ships a reference [Model Context Protocol](https://modelcontextprotocol.io/)
-server that exposes its validators as MCP tools. All four use stdio
-transport and work with any MCP-compatible client; the configuration
+server that exposes its validators as MCP tools. Four of the five
+protocols ship a reference MCP server today (ACAP, Phala, NERVE,
+PACE); a Pramana MCP server is planned. All shipped servers use
+stdio transport and work with any MCP-compatible client; the
+configuration
 below uses VSCode's native MCP settings, and the same console script
 binds to any stdio-capable host. The pattern is identical across
 repos; each stays independently installable with no shared package.
@@ -241,8 +250,9 @@ tool schema and per-tool examples.
 | Phala | [phala-protocol](https://github.com/ravikiran438/phala-protocol) | 68 (Core + welfare_detectors + MCP) | Core skeleton + welfare_detectors spec |
 | NERVE | [pratyahara-nerve](https://github.com/ravikiran438/pratyahara-nerve) | 94 (Core + Yathartha + MCP) | Full state machine (Core + Yathartha) |
 | PACE | [sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace) | 96 (Core + augmentation_profile + MCP) | Full state machine + augmentation_profile spec |
+| Pramana | [pramana-attestation](https://github.com/ravikiran438/pramana-attestation) | 84 (Core + claim-attestation extension) | Full lifecycle + claim-attestation spec |
 
-Total: **386 tests** across the stack.
+Total: **470 tests** across the stack.
 
 ## Papers
 
@@ -253,3 +263,4 @@ Total: **386 tests** across the stack.
 | Pratyahara / NERVE | [10.5281/zenodo.19628589](https://doi.org/10.5281/zenodo.19628589) |
 | Sauvidya / PACE | [10.5281/zenodo.19633139](https://doi.org/10.5281/zenodo.19633139) |
 | Yathartha (NERVE extension) | [10.5281/zenodo.19659633](https://doi.org/10.5281/zenodo.19659633) |
+| Pramana | [10.5281/zenodo.20283647](https://doi.org/10.5281/zenodo.20283647) |

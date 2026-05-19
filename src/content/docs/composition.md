@@ -1,6 +1,6 @@
 ---
 title: How They Compose
-description: The four protocols are independent but composable. Here is what happens when you deploy them together.
+description: The five protocols are independent but composable. Here is what happens when you deploy them together.
 ---
 
 ## Independence
@@ -43,9 +43,9 @@ signals strengthen or weaken NERVE's `SynapticChannel` myelination,
 creating a feedback loop where well-performing pathways become faster
 and poorly-performing ones are attenuated.
 
-### All Four Together
+### All Four Phases Together
 
-The full lifecycle:
+The full phase-protocol lifecycle:
 
 1. **PACE** checks: can this principal participate?
 2. **ACAP** checks: has the caller honored the callee's terms?
@@ -69,8 +69,18 @@ floors on the same grid, governance tiering consults the effective
 floor when classifying a re-consent diff, and audit projection
 renders the full trail into a regulator-facing report.
 
+### Pramana across all phases
+
+Pramana is cross-cutting rather than phase-bound. Every consequential
+output produced at any phase (a PACE accessibility decision, an ACAP
+consent finding, a NERVE trust assessment, a Phala satisfaction
+event) can itself be wrapped in a typed `ClaimAttestation` so the
+source and procedure that warranted the output survive as a
+re-verifiable record. The phase protocols are not changed; the
+attestation is layered on each emitted claim.
+
 ## On the AgentCard
 
-All four protocols declare themselves in the same `capabilities.extensions`
+All five protocols declare themselves in the same `capabilities.extensions`
 array. See [For A2A Developers](/agent-protocol-stack/developers/) for the
 full AgentCard example.

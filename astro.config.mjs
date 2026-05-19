@@ -8,7 +8,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Agent Protocol Stack',
-			description: 'Four protocol extensions for accountable, accessible, and welfare-aware autonomous agent networks.',
+			description: 'Five protocol extensions for accountable, accessible, welfare-aware, and audit-verifiable autonomous agent networks.',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/ravikiran438' }],
 			pagefind: true,
 			sidebar: [
@@ -21,6 +21,7 @@ export default defineConfig({
 						{ label: 'Phala (Welfare)', slug: 'protocols/phala' },
 						{ label: 'Pratyahara / NERVE (Integrity)', slug: 'protocols/pratyahara' },
 						{ label: 'Sauvidya / PACE (Accessibility)', slug: 'protocols/sauvidya' },
+						{ label: 'Pramana (Verification)', slug: 'protocols/pramana' },
 					],
 				},
 				{ label: 'How They Compose', slug: 'composition' },
