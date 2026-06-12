@@ -90,6 +90,28 @@ That a uniform fit would be a *smell* is the point: forcing a human channel onto
 machine-to-machine integrity checks would be a misfit. The unevenness is the
 design working as intended.
 
+## Presentation layer: A2UI
+
+This spec governs *what* a human-in-the-loop message means and *how* it travels —
+not how it looks. Rendering is a separate, complementary layer.
+[A2UI](https://github.com/google/A2UI) (Google, open-sourced December 2025) is a
+declarative format for agent-generated interfaces: the agent sends a *blueprint*
+of trusted, pre-approved components and the client renders them with its own
+native widgets. A2UI rides the same AG-UI transport, so the very interrupts this
+spec defines — a consent gate, a capacity challenge, a satisfaction prompt — can
+be *rendered* as a rich native form via A2UI instead of a plain `message` +
+`responseSchema`, with **Sauvidya / PACE** choosing the modality and styling
+appropriate to the principal.
+
+The boundary is deliberate: A2UI decides presentation only — never the typed
+payload, the canonical URI identity, or the governance decision. It sits at the
+far end of the pipe:
+
+> governance object → carried over AG-UI → *rendered* via A2UI
+
+So the loop closes without A2UI entering the governance stack: it is a rendering
+target the bindings can feed, not a protocol they compose with.
+
 ## Conformance and reference bindings
 
 An AG-UI governance binding conforms if it keys payloads and interrupts by the
