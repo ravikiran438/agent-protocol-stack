@@ -1,9 +1,9 @@
 ---
 title: Agent Protocol Stack
-description: Five protocol extensions for accountable, accessible, welfare-aware, and audit-verifiable autonomous agent networks.
+description: Composable protocol extensions for accountable, accessible, welfare-aware, reliably-delivered, and audit-verifiable autonomous agent networks.
 template: splash
 hero:
-  tagline: Five independent, composable protocol extensions for the A2A and MCP agent stack. Each addresses a structural gap that current protocols leave open.
+  tagline: Independent, composable protocol extensions for the A2A and MCP agent stack. Each addresses a structural gap that current protocols leave open.
   actions:
     - text: Read the Overview
       link: /agent-protocol-stack/overview/
@@ -31,5 +31,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
   </Card>
   <Card title="Pramana" icon="document">
     **Verification.** Wrap every consequential agent output in a typed `ClaimAttestation` with a `verify()` operation against the recorded source. Standardizes the verification artifact across the patterns already in production (RAG, tool-augmented traces, generator-verifier loops) and replaces probabilistic verdicts with a deterministic contract where the claim type admits one. [Read more →](/agent-protocol-stack/protocols/pramana/)
+  </Card>
+  <Card title="Abhyasa" icon="rocket">
+    **Reliable Delivery.** Custody transfer of governance obligations under a *deliver-or-report* guarantee, so a consent decision or a corrective welfare signal is never silently lost over a lossy or partitioned channel. The delivery layer the other protocols ride on. [Read more →](/agent-protocol-stack/protocols/abhyasa/)
   </Card>
 </CardGrid>

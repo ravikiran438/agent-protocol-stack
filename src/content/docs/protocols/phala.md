@@ -66,7 +66,8 @@ continue to operate under Phala Core's existing single-channel
 
 ## Links
 
-- **Paper:** [Zenodo DOI 10.5281/zenodo.19625612](https://doi.org/10.5281/zenodo.19625612)
+- **Full paper:** [Phala (full text)](/agent-protocol-stack/papers/phala/)
+- **Paper:** [Zenodo DOI 10.5281/zenodo.19625611](https://doi.org/10.5281/zenodo.19625611)
 - **Repository:** [github.com/ravikiran438/phala-protocol](https://github.com/ravikiran438/phala-protocol)
 - **Extension URI:** `https://ravikiran438.github.io/phala-protocol/v1`
 - **Tests:** 68 passing (Core + welfare_detectors + MCP)

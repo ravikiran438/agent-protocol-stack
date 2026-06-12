@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: The structural gaps in the agent protocol stack and the five extensions that address them.
+description: The structural gaps in the agent protocol stack and the protocol extensions that address them.
 ---
 
 ## The Problem
@@ -8,7 +8,7 @@ description: The structural gaps in the agent protocol stack and the five extens
 The Agent2Agent (A2A) protocol governs how agents discover, authenticate,
 and exchange tasks with each other. The Model Context Protocol (MCP) governs
 how agents call tools and interpret results. Neither governs what happens
-at five critical boundaries:
+at the critical boundaries A2A and MCP leave open:
 
 1. **The policy boundary.** A2A's AgentCard describes what an agent *can* do.
    It has no mechanism for what calling agents *are permitted to do* under
@@ -38,7 +38,13 @@ at five critical boundaries:
    at worst (from reviewer-ensemble safety gates). No shared wire
    format standardizes the artifact across vendors or across agents.
 
-## Five Protocols, Five Gaps
+6. **The delivery boundary.** A governance obligation carried by a message
+   — a consent revocation, a corrective welfare signal — can be silently
+   dropped over a lossy, intermittent, or partitioned channel. Transport
+   reliability moves the bytes; it does not guarantee that the obligation
+   the bytes carry is applied, or that its loss is reported.
+
+## The Protocols and the Gaps They Close
 
 | Protocol | Gap addressed | Phase |
 |---|---|---|
@@ -47,6 +53,7 @@ at five critical boundaries:
 | [Pratyahara / NERVE](/agent-protocol-stack/protocols/pratyahara/) | Integrity: is the agent still trustworthy? | Ongoing |
 | [Phala](/agent-protocol-stack/protocols/phala/) | Welfare: did the action serve the principal? | Exit |
 | [Pramana](/agent-protocol-stack/protocols/pramana/) | Verification: can the auditor re-execute the claim? | Per-output |
+| [Abhyasa](/agent-protocol-stack/protocols/abhyasa/) | Delivery: did the governance obligation survive the channel? | Transport |
 
 Each protocol is **independent**. You can deploy any one without the others.
 They are also **composable**: deploying multiple protocols on the same
@@ -54,7 +61,7 @@ AgentCard produces compound guarantees that no single protocol provides alone.
 
 ## Design Principles
 
-All five protocols share three architectural commitments:
+All the protocols share three architectural commitments:
 
 1. **Non-breaking A2A/MCP extensions.** Every protocol uses the standard
    `capabilities.extensions` mechanism. No core spec changes are required.

@@ -38,7 +38,8 @@ version-gated re-acceptance, and the no-disputed-permit invariant.
 
 ## Links
 
-- **Paper:** [arXiv:2604.16524](https://arxiv.org/abs/2604.16524) · also on [Zenodo (DOI 10.5281/zenodo.19606339)](https://doi.org/10.5281/zenodo.19606339)
+- **Full paper:** [Anumati (full text)](/agent-protocol-stack/papers/anumati/)
+- **Paper:** [arXiv:2604.16524](https://arxiv.org/abs/2604.16524)
 - **Repository:** [github.com/ravikiran438/agent-consent-protocol](https://github.com/ravikiran438/agent-consent-protocol)
 - **Extension URI:** `https://ravikiran438.github.io/agent-consent-protocol/v1`
 - **Tests:** 35 passing

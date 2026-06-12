@@ -1,10 +1,10 @@
 ---
 title: ACAP Extensions
-description: Four reference extensions that layer on top of Anumati / ACAP Core — tiered escalation, sensitivity preferences, regulatory context, and audit projection.
+description: Reference extensions that layer on top of Anumati / ACAP Core — tiered escalation, sensitivity preferences, regulatory context, and audit projection.
 ---
 
 Anumati Core defines the three-primitive consent chain specified in the
-paper. These four extensions layer on top of Core to address specific
+paper. These extensions layer on top of Core to address specific
 deployment concerns: alert fatigue from version bumps, asymmetric
 sensitivity across data categories, jurisdictional floors that cannot
 be lowered by the principal, and regulator-facing report rendering.
@@ -158,14 +158,14 @@ technical-documentation requirements for high-risk deployments.
 
 ## How They Compose
 
-The four extensions stack deliberately:
+The extensions stack deliberately:
 
 1. **Category Preferences** provides the two-axis grid (category x dimension) on which every other extension speaks.
 2. **Regulatory Context** uses the same grid as its encoding surface; `compute_floor` composes principal preferences with every declared regulatory context and returns the strictest cell.
 3. **Governance Tiering** consults the effective floor when classifying a re-consent diff; a `HIGH` cell is a candidate for automatic `HUMAN_REQUIRED` escalation regardless of the structural signals on the diff.
 4. **Audit Projection** renders the full history into a regulator-facing report; the `AuditEntryType` enum already reserves `GOVERNANCE_AUTO`, `GOVERNANCE_REVIEWED`, and `HUMAN_REVIEW` entries so a deployment that layers governance-tiering can surface those decisions in the timeline.
 
-The Core paper at [arXiv:2604.16524](https://arxiv.org/abs/2604.16524) (also [Zenodo DOI 10.5281/zenodo.19606339](https://doi.org/10.5281/zenodo.19606339)) specifies the three primitives these extensions build on. Extensions are maintained in the same repository and do not currently carry individual DOIs.
+The Core paper at [arXiv:2604.16524](https://arxiv.org/abs/2604.16524) specifies the three primitives these extensions build on. Extensions are maintained in the same repository and do not currently carry individual DOIs.
 
 ## MCP Server
 

@@ -88,9 +88,9 @@ extension's validators.
 
 ## Links
 
+- **Full paper:** [Pramāṇa (full text)](/agent-protocol-stack/papers/pramana/)
 - **Paper:** *Pramāṇa: A Protocol-Layer Treatment of Claim
-  Verification in Autonomous Agent Networks* ([Zenodo DOI
-  10.5281/zenodo.20283647](https://doi.org/10.5281/zenodo.20283647))
+  Verification in Autonomous Agent Networks* ([arXiv:2605.20312](https://arxiv.org/abs/2605.20312))
 - **Repository:** [github.com/ravikiran438/pramana-attestation](https://github.com/ravikiran438/pramana-attestation)
 - **Extension URI:** `https://ravikiran438.github.io/pramana-attestation/v1`
 - **Tests:** 84 passing (59 Core + 25 claim-attestation extension)

@@ -59,7 +59,7 @@ verified under TLC (N-1, N-3, N-4, N-9, N-10, N-14, N-15 modeled).
 ## Yathartha Extension (Capability Surface)
 
 The [Yathartha extension](https://github.com/ravikiran438/pratyahara-nerve/tree/main/extensions/yathartha)
-([Zenodo DOI 10.5281/zenodo.19659633](https://doi.org/10.5281/zenodo.19659633))
+([Zenodo DOI 10.5281/zenodo.19659632](https://doi.org/10.5281/zenodo.19659632))
 adds a `CapabilitySurface` primitive and three invariants (N-16, N-17,
 N-18) that condition behavioral drift detection on an observed
 baseline. Without this extension, a `MicroglialObserver` cannot
@@ -85,11 +85,14 @@ Full specification with TLA+ model and TLC configuration at
 [`extensions/yathartha/`](https://github.com/ravikiran438/pratyahara-nerve/tree/main/extensions/yathartha).
 The extension is additive: agents that do not declare a
 `CapabilitySurface` continue to operate under NERVE's existing
-single-fingerprint drift model.
+single-fingerprint drift model. See the
+[full Yathartha paper](/agent-protocol-stack/papers/yathartha/) for the
+complete treatment.
 
 ## Links
 
-- **Paper:** [Zenodo DOI 10.5281/zenodo.19628589](https://doi.org/10.5281/zenodo.19628589)
+- **Full paper:** [Pratyahara (full text)](/agent-protocol-stack/papers/pratyahara/)
+- **Paper:** [Zenodo DOI 10.5281/zenodo.19628588](https://doi.org/10.5281/zenodo.19628588)
 - **Repository:** [github.com/ravikiran438/pratyahara-nerve](https://github.com/ravikiran438/pratyahara-nerve)
 - **Extension URI:** `https://ravikiran438.github.io/pratyahara-nerve/v1`
 - **Tests:** 94 passing (Core + Yathartha + MCP)

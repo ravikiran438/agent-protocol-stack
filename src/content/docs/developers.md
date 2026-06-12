@@ -5,8 +5,8 @@ description: How to declare the protocol extensions on a single AgentCard.
 
 ## AgentCard with All Extensions
 
-All five protocols use the standard A2A `capabilities.extensions`
-mechanism. An agent that supports all five declares them in a single
+These protocols all use the standard A2A `capabilities.extensions`
+mechanism. An agent that supports all of them declares them in a single
 array:
 
 ```json
@@ -39,6 +39,11 @@ array:
         "uri": "https://ravikiran438.github.io/pramana-attestation/v1",
         "description": "Pramana: per-output ClaimAttestation with deterministic verification.",
         "required": false
+      },
+      {
+        "uri": "https://ravikiran438.github.io/abhyasa-protocol/v1",
+        "description": "Abhyasa: deliver-or-report custody transfer for governance obligations.",
+        "required": false
       }
     ]
   }
@@ -54,6 +59,7 @@ array:
 | NERVE | `true` | Security layer: callee expects callers to participate in the trust envelope |
 | PACE | `true` | Agents serving principals with registered PCPs MUST adapt interaction |
 | Pramana | `false` | Verification artifacts are deployment-specific; regulated deployments (CFPB, NYDFS, §1557) set this to `true`, general-purpose deployments leave it advisory |
+| Abhyasa | `false` | Delivery/custody layer; advisory unless the deployment relies on deliver-or-report for corrective obligations |
 
 ### Agents that support fewer protocols
 
@@ -103,9 +109,9 @@ keyed by the same extension URI used on the A2A AgentCard:
 ## MCP Reference Servers
 
 Each protocol ships a reference [Model Context Protocol](https://modelcontextprotocol.io/)
-server that exposes its validators as MCP tools. Four of the five
+server that exposes its validators as MCP tools. Most
 protocols ship a reference MCP server today (ACAP, Phala, NERVE,
-PACE); a Pramana MCP server is planned. All shipped servers use
+PACE, Abhyasa); a Pramana MCP server is planned. All shipped servers use
 stdio transport and work with any MCP-compatible client; the
 configuration
 below uses VSCode's native MCP settings, and the same console script
@@ -117,7 +123,8 @@ repos; each stays independently installable with no shared package.
 | ACAP | `acap-mcp` | 9 | Core validators + one primary entry point per extension (governance tiering, category preferences, regulatory context, audit projection), plus `validate_usage_policy_ref` for AgentCard payload validation. |
 | Phala | `phala-mcp` | 12 | Six Core validators (five primitives + BU-Privacy) plus five welfare_detectors extension validators: TypedBeliefUpdate structural check, WD-1 typed composition, WD-2 arbitration, WD-3 horizon, WD-4 provenance. Plus `validate_phala_service_ref` for AgentCard payload validation. BU-2 (per-agent uniqueness) and BU-4 (TTL expiry) are runtime-enforced and not exposed via MCP — they require state (a set of updates) or wall-clock time that an MCP tool boundary doesn't naturally carry. |
 | NERVE | `nerve-mcp` | 13 | Seven Core safety invariants (N-1, N-3, N-4, N-5, N-9, N-14, N-15) plus three Yathartha extension invariants (N-16, N-17, N-18) for capability-surface integrity. Plus three AgentCard / wire validators: `validate_neural_posture_ref`, `validate_nerve_envelope`, `validate_behavioral_fingerprint`. |
-| PACE | `pace-mcp` | 16 | Seven Core validators: PCP structural check plus six named accessibility invariants (IM-1, IM-2, CCC-1, CCC-2, AIC-1, AIC-2). Plus four augmentation_profile extension validators (AUG-1 reversibility, AUG-3 identity, AUG-4 skill maintenance, AUG-5 emergency boundary). Plus five wire validators introduced in PACE v3: `validate_accessibility_service_ref`, `validate_active_challenge`, `validate_pace_consent_annotation`, `validate_pace_violation_notice`, `compute_ccc_trend`. AUG-2 is omitted because audit decomposition is enforced at type construction by the `Mediation` enum, leaving no separate runtime check to expose. |
+| PACE | `pace-mcp` | 16 | Seven Core validators: PCP structural check plus six named accessibility invariants (IM-1, IM-2, CCC-1, CCC-2, AIC-1, AIC-2). Plus four augmentation_profile extension validators (AUG-1 reversibility, AUG-3 identity, AUG-4 skill maintenance, AUG-5 emergency boundary). Plus five wire validators for the sibling-annotation surface: `validate_accessibility_service_ref`, `validate_active_challenge`, `validate_pace_consent_annotation`, `validate_pace_violation_notice`, `compute_ccc_trend`. AUG-2 is omitted because audit decomposition is enforced at type construction by the `Mediation` enum, leaving no separate runtime check to expose. |
+| Abhyasa | `abhyasa-mcp` | 6 | Three structural validators (Obligation, CustodyAck, AbhyasaServiceRef), the AC-1 admissibility check, `safe(O)` computation, and a deliver-or-report custody-transfer simulation over a configurable lossy channel. |
 
 ### Install
 
@@ -258,9 +265,10 @@ Total: **470 tests** across the stack.
 
 | Protocol | DOI |
 |---|---|
-| Anumati / ACAP | [arXiv:2604.16524](https://arxiv.org/abs/2604.16524) · [Zenodo 10.5281/zenodo.19606339](https://doi.org/10.5281/zenodo.19606339) |
-| Phala | [10.5281/zenodo.19625612](https://doi.org/10.5281/zenodo.19625612) |
-| Pratyahara / NERVE | [10.5281/zenodo.19628589](https://doi.org/10.5281/zenodo.19628589) |
-| Sauvidya / PACE | [10.5281/zenodo.19633139](https://doi.org/10.5281/zenodo.19633139) |
-| Yathartha (NERVE extension) | [10.5281/zenodo.19659633](https://doi.org/10.5281/zenodo.19659633) |
-| Pramana | [10.5281/zenodo.20283647](https://doi.org/10.5281/zenodo.20283647) |
+| Anumati / ACAP | [arXiv:2604.16524](https://arxiv.org/abs/2604.16524) |
+| Phala | [10.5281/zenodo.19625611](https://doi.org/10.5281/zenodo.19625611) |
+| Pratyahara / NERVE | [10.5281/zenodo.19628588](https://doi.org/10.5281/zenodo.19628588) |
+| Sauvidya / PACE | [10.5281/zenodo.19633138](https://doi.org/10.5281/zenodo.19633138) |
+| Yathartha (NERVE extension) | [10.5281/zenodo.19659632](https://doi.org/10.5281/zenodo.19659632) |
+| Pramana | [arXiv:2605.20312](https://arxiv.org/abs/2605.20312) |
+| Abhyasa | [10.5281/zenodo.20644821](https://doi.org/10.5281/zenodo.20644821) |

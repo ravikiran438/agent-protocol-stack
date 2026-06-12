@@ -88,7 +88,8 @@ defensive-accommodation model.
 
 ## Links
 
-- **Paper:** [Zenodo DOI 10.5281/zenodo.19633139](https://doi.org/10.5281/zenodo.19633139)
+- **Full paper:** [Sauvidya (full text)](/agent-protocol-stack/papers/sauvidya/)
+- **Paper:** [Zenodo DOI 10.5281/zenodo.19633138](https://doi.org/10.5281/zenodo.19633138)
 - **Repository:** [github.com/ravikiran438/sauvidya-pace](https://github.com/ravikiran438/sauvidya-pace)
 - **Extension URI:** `https://ravikiran438.github.io/sauvidya-pace/v1`
 - **Tests:** 96 passing (Core + augmentation_profile + MCP)

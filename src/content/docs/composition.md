@@ -1,6 +1,6 @@
 ---
 title: How They Compose
-description: The five protocols are independent but composable. Here is what happens when you deploy them together.
+description: These protocols are independent but composable. Here is what happens when you deploy them together.
 ---
 
 ## Independence
@@ -43,7 +43,7 @@ signals strengthen or weaken NERVE's `SynapticChannel` myelination,
 creating a feedback loop where well-performing pathways become faster
 and poorly-performing ones are attenuated.
 
-### All Four Phases Together
+### All Phases Together
 
 The full phase-protocol lifecycle:
 
@@ -59,7 +59,7 @@ The result feeds back into trust (NERVE myelination) and future routing
 
 ### ACAP Extensions
 
-ACAP carries four reference extensions that layer specific deployment
+ACAP carries reference extensions that layer specific deployment
 concerns onto the Core chain without modifying it:
 [governance tiering, category preferences, regulatory context, and
 audit projection](/agent-protocol-stack/protocols/acap-extensions/).
@@ -79,8 +79,20 @@ source and procedure that warranted the output survive as a
 re-verifiable record. The phase protocols are not changed; the
 attestation is layered on each emitted claim.
 
+### Abhyasa under all phases
+
+Abhyasa is the delivery layer, cross-cutting like Pramana. The governance
+obligations the phase protocols produce — an ACAP consent revocation, a
+Phala corrective `BeliefUpdate` whose loss would leave an agent acting on
+withdrawn authority or a rejected preference — are carried under custody
+with a *deliver-or-report* guarantee: each is applied, explicitly declined,
+or escalated to the principal, never silently lost over a lossy or
+partitioned channel. The phase protocols are unchanged; Abhyasa wraps the
+propagation of their asymmetric-cost obligations and adds a principal-side
+fail-safe for when the channel defeats delivery.
+
 ## On the AgentCard
 
-All five protocols declare themselves in the same `capabilities.extensions`
+All these protocols declare themselves in the same `capabilities.extensions`
 array. See [For A2A Developers](/agent-protocol-stack/developers/) for the
 full AgentCard example.

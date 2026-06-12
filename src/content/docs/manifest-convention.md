@@ -29,7 +29,7 @@ whether the convention generalizes.
 
 ## Live reference manifests
 
-The five protocols in this stack each publish a manifest at the URI
+Each protocol in this stack publishes a manifest at the URI
 each agent declares. Anyone with a JSON-Schema validator can fetch
 these directly:
 
@@ -233,7 +233,7 @@ everything else is metadata for human readers and richer tooling.
 ## Status
 
 - ✅ Convention defined; published as JSON-Schema-based `ExtensionManifest` envelope
-- ✅ Four reference protocols (ACAP, Phala, NERVE, PACE) publish manifests
+- ✅ Reference protocols (ACAP, Phala, NERVE, PACE) publish manifests
   per this convention; seven sub-extensions follow the same pattern
 - ✅ Manifests resolvable over HTTPS via GitHub Pages; each manifest's
   `extension.uri` is self-consistent with the URL it is fetched from

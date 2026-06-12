@@ -1,0 +1,4 @@
+# Permit these dependencies to run their install/build scripts (pnpm 11).
+allowBuilds:
+  esbuild: true
+  sharp: true
