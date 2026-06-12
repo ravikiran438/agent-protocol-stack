@@ -19,11 +19,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # Node first, so pnpm 11 (needs Node >=22.13) installs on the right runtime.
       - uses: actions/setup-node@v4
         with:
           node-version: 24.15.0
-      - uses: pnpm/action-setup@v4
+      # corepack (bundled with Node 24) installs pnpm under Node 24. Avoids
+      # pnpm/action-setup, whose self-installer runs on the Actions runtime
+      # Node 20 and is rejected by pnpm 11's "Node >=22.13" engine.
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.5.2 --activate
       - name: Locate pnpm store
         shell: bash
         run: echo "STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
