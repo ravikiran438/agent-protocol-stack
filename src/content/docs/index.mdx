@@ -36,3 +36,18 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     **Reliable Delivery.** Custody transfer of governance obligations under a *deliver-or-report* guarantee, so a consent decision or a corrective welfare signal is never silently lost over a lossy or partitioned channel. The delivery layer the other protocols ride on. [Read more →](/agent-protocol-stack/protocols/abhyasa/)
   </Card>
 </CardGrid>
+
+## Transports
+
+These are governance extensions, not a transport of their own. They bind to the
+agent stack's transports: **A2A** (agent&#8596;agent) via `capabilities.extensions[]`
+and **MCP** (agent&#8596;tools) via `_meta`. They also bind to
+[**AG-UI**](https://github.com/ag-ui-protocol/ag-ui), the agent&#8596;human
+transport — the edge where a person enters a run to grant consent, respond to a
+capacity check, or rate an outcome.
+
+<CardGrid>
+  <Card title="Governance over AG-UI" icon="puzzle">
+    **Human-in-the-loop binding.** How a governance decision projects onto AG-UI's interrupt mechanism, with an interactive walk-through of one governed run. [Read the binding →](/agent-protocol-stack/ag-ui/)
+  </Card>
+</CardGrid>

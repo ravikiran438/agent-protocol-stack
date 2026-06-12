@@ -1,0 +1,128 @@
+<!doctype html>
+<!--
+  Copyright 2026 Ravi Kiran Kadaboina
+  Licensed under the Apache License, Version 2.0.
+
+  Governance over AG-UI — interactive event-stream visualizer.
+  Standalone, self-theming, no dependencies. Embedded via <iframe> on the
+  "Governance over AG-UI" docs page.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Governed AG-UI run</title>
+<style>
+  :root{
+    --ink:#1a1a1a; --muted:#5b6472; --line:#e2e2e2; --card:#ffffff;
+    --human:#b4530a; --agent:#2563eb;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --ink:#e8e8e8; --muted:#9aa3b2; --line:#33384a; --card:#1b1e2b;
+           --human:#f59e6b; --agent:#7aa2ff; }
+  }
+  html,body{ background:transparent; margin:0; }
+  body{
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color:var(--ink); line-height:1.4; padding:4px 2px 14px;
+  }
+  h2{ font-size:18px; margin:0 0 2px; }
+  .sub{ color:var(--muted); font-size:13px; margin-bottom:14px; }
+  .bar{ display:flex; gap:8px; align-items:center; margin-bottom:14px; flex-wrap:wrap; }
+  button{ font:inherit; font-size:13px; cursor:pointer; border:1px solid var(--line);
+    background:var(--card); color:var(--ink); border-radius:7px; padding:5px 12px; }
+  button.primary{ background:var(--human); color:#fff; border-color:var(--human); }
+  .legend{ font-size:12px; color:var(--muted); display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .dot{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle; }
+  .tag.gate{ background:var(--human); color:#fff; border:1px solid var(--human); font-size:10px;
+    padding:1px 7px; border-radius:20px; }
+  .stream{ position:relative; padding-left:26px; }
+  .stream:before{ content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:var(--line); }
+  .ev{ position:relative; margin:0 0 7px; border:1px solid var(--line); border-radius:9px;
+    background:var(--card); padding:9px 12px; transition:.18s; }
+  body.stepping .ev{ opacity:.28; }
+  .ev.on{ opacity:1; }
+  .ev.gate{ cursor:pointer; border-left:4px solid var(--human); }
+  .ev.gate:hover{ background:rgba(180,83,10,.06); }
+  .ev:before{ content:""; position:absolute; left:-22px; top:14px; width:11px; height:11px;
+    border-radius:50%; background:var(--agent); border:2px solid var(--card); }
+  .ev.human:before{ background:var(--human); }
+  .ev.flash{ box-shadow:0 0 0 3px rgba(180,83,10,.25); }
+  .row1{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .etype{ font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size:12px; font-weight:600; }
+  .tag{ font-size:11px; padding:1px 7px; border-radius:20px; border:1px solid var(--line); color:var(--muted); }
+  .tag.proto{ color:var(--ink); border-color:currentColor; }
+  .desc{ font-size:13px; color:var(--muted); margin-top:3px; }
+  .json{ display:none; margin-top:9px; font-family:ui-monospace, Menlo, monospace; font-size:11.5px;
+    white-space:pre; overflow-x:auto; background:rgba(127,127,127,.10); border-radius:7px; padding:9px 11px; }
+  .ev.open .json{ display:block; }
+  .hint{ font-size:11px; color:var(--muted); margin-left:6px; }
+</style>
+</head>
+<body>
+  <h2>One governed run, over AG-UI</h2>
+  <div class="sub">A single human-facing task. Governance computed on the agent&#8596;agent side rides the AG-UI stream; the human enters exactly at the gates. Click a <strong>gate</strong> for its wire JSON, or press Step through.</div>
+  <div class="bar">
+    <button class="primary" id="play">&#9654; Step through</button>
+    <button id="reset">Reset</button>
+    <span class="legend">
+      <span><span class="dot" style="background:#2563eb"></span>agent&#8596;agent (A2A / ACS)</span>
+      <span><span class="dot" style="background:#b4530a"></span>agent&#8596;human (AG-UI)</span>
+      <span><span class="tag gate">gate</span> human-in-the-loop</span>
+    </span>
+  </div>
+  <div class="stream" id="stream"></div>
+<script>
+(function(){
+  var EV = [
+    {t:"RUN_STARTED", side:"agent", proto:"AG-UI lifecycle", d:"threadId t1, runId r1 — the run begins."},
+    {t:"STATE_SNAPSHOT", side:"human", proto:"Sauvidya / PACE", d:"Accessibility envelope published before any gate (invariant B-5) so the UI adapts modality and timing.",
+      json:'{\n  "type": "STATE_SNAPSHOT",\n  "snapshot": {\n    "https://ravikiran438.github.io/sauvidya-pace/v1": {\n      "supported_modalities": ["voice","large_text"],\n      "language": "te", "response_window_ms": 300000\n    }\n  }\n}'},
+    {t:"RUN_FINISHED · interrupt", side:"human", proto:"Anumati / ACAP", gate:"Consent gate", d:"Run pauses for a human decision before the consequential action. reason: confirmation.",
+      json:'{\n  "type": "RUN_FINISHED",\n  "outcome": { "type": "interrupt", "interrupts": [ {\n    "id": "acap-consent-sha256:9f2c",\n    "reason": "confirmation",\n    "message": "Share your pharmacy records with the pricing agent?",\n    "responseSchema": { "properties": {\n      "decision": { "enum": ["accepted","rejected","conditional"] },\n      "policy_hash": { "type": "string" } } },\n    "metadata": { "governance": {\n      "uri": "https://ravikiran438.github.io/agent-consent-protocol/v1",\n      "type": "ConsentRecord", "policy_hash": "sha256:9f2c" } }\n  } ] }\n}'},
+    {t:"resume", side:"human", proto:"Anumati / ACAP", gate:"Human decides", d:"Same threadId. The decision — including a denial — is carried IN the payload (B-3), never as a bare cancel.",
+      json:'{\n  "threadId": "t1", "runId": "r2",\n  "resume": [ {\n    "interruptId": "acap-consent-sha256:9f2c",\n    "status": "resolved",\n    "payload": { "decision": "accepted", "policy_hash": "sha256:9f2c" }\n  } ]\n}\n// -> typed ConsentRecord(decision=ACCEPTED)'},
+    {t:"TOOL_CALL_* / TEXT_MESSAGE_*", side:"agent", proto:"work", d:"The agent performs the now-authorized action and streams the output."},
+    {t:"ACTIVITY", side:"agent", proto:"Pramana", d:"Each consequential output carries a ClaimAttestation as an inspectable Activity event — surfaced for audit, not a gate.",
+      json:'{\n  "type": "ACTIVITY", "activityType": "ATTESTATION",\n  "value": {\n    "uri": "https://arxiv.org/abs/2605.20312",\n    "claim": "lowest in-network price = $42.00",\n    "source": "pharmacy_api#resp_88", "verified": true\n  }\n}'},
+    {t:"RUN_FINISHED · interrupt", side:"human", proto:"Phala", gate:"Satisfaction", d:"End-of-task: 'did this serve you?' reason: input_required. (Or a volunteered MetaEvent thumbs-up.)",
+      json:'{\n  "type": "RUN_FINISHED",\n  "outcome": { "type": "interrupt", "interrupts": [ {\n    "id": "phala-sat-outcome-1",\n    "reason": "input_required",\n    "message": "Did this outcome serve you?",\n    "responseSchema": { "properties": {\n      "valence": { "type": "number", "minimum": -1, "maximum": 1 } } },\n    "metadata": { "governance": {\n      "uri": "https://ravikiran438.github.io/phala-protocol/v1",\n      "type": "SatisfactionRecord", "outcome_event_id": "outcome-1" } }\n  } ] }\n}'},
+    {t:"resume", side:"human", proto:"Phala", gate:"Human rates", d:"valence in [-1,1] -> typed SatisfactionRecord. The BeliefUpdate then propagates through the agent network, unchanged by transport.",
+      json:'{\n  "resume": [ {\n    "interruptId": "phala-sat-outcome-1",\n    "status": "resolved",\n    "payload": { "valence": 0.8 }\n  } ]\n}\n// -> SatisfactionRecord(valence=0.8, source=EXPLICIT, confidence=1.0)'},
+    {t:"RUN_FINISHED", side:"agent", proto:"AG-UI lifecycle", d:"outcome: { type: success } — the loop is closed."}
+  ];
+  var stream = document.getElementById('stream');
+  EV.forEach(function(e, i){
+    var div = document.createElement('div');
+    div.className = 'ev ' + (e.side==='human'?'human':'agent') + (e.gate?' gate':'');
+    var gateTag = e.gate ? '<span class="tag gate">'+e.gate+'</span>' : '';
+    var jsonHint = e.json ? '<span class="hint">click ▾</span>' : '';
+    div.innerHTML = '<div class="row1"><span class="etype">'+e.t+'</span>'+
+      '<span class="tag proto">'+e.proto+'</span>'+gateTag+jsonHint+'</div>'+
+      '<div class="desc">'+e.d+'</div>'+ (e.json ? '<div class="json">'+e.json+'</div>' : '');
+    if(e.json){ div.addEventListener('click', function(){ div.classList.toggle('open'); }); }
+    stream.appendChild(div);
+  });
+  var evs = Array.prototype.slice.call(stream.children);
+  var playBtn = document.getElementById('play'), timer=null, idx=0;
+  function clearStep(){ document.body.classList.remove('stepping'); evs.forEach(function(el){ el.classList.remove('on','flash'); }); }
+  document.getElementById('reset').addEventListener('click', function(){
+    if(timer){ clearInterval(timer); timer=null; } clearStep();
+    evs.forEach(function(el){ el.classList.remove('open'); }); playBtn.innerHTML='&#9654; Step through';
+  });
+  playBtn.addEventListener('click', function(){
+    if(timer){ clearInterval(timer); timer=null; playBtn.innerHTML='&#9654; Step through'; clearStep(); return; }
+    clearStep(); document.body.classList.add('stepping'); idx=0; playBtn.innerHTML='&#10074;&#10074; Stop';
+    function tick(){
+      if(idx>0){ evs[idx-1].classList.remove('flash'); }
+      if(idx>=evs.length){ clearInterval(timer); timer=null; playBtn.innerHTML='&#9654; Step through'; return; }
+      var el = evs[idx]; el.classList.add('on','flash');
+      if(EV[idx].json) el.classList.add('open');
+      el.scrollIntoView({block:'nearest', behavior:'smooth'}); idx++;
+    }
+    tick(); timer = setInterval(tick, 1150);
+  });
+})();
+</script>
+</body>
+</html>
