@@ -104,13 +104,14 @@ emits the full envelope.
 ### 1. Install the testbed
 
 ```sh
-git clone https://github.com/ravikiran438/a2a-testbed.git
-cd a2a-testbed && pip install -e ".[test]"
+pip install a2a-testbed
 ```
 
-Source install only; the package is not yet published to PyPI.
-The live playground at <https://a2a-testbed.com> performs the
-same validation in the browser without a local install.
+The package is on [PyPI](https://pypi.org/project/a2a-testbed/). To
+run a command without installing anything, prefix it with `uvx`
+(`uvx a2a-testbed manifest validate ...`). The live playground at
+<https://a2a-testbed.com> performs the same validation in the browser
+without a local install.
 
 ### 2. Author a Pydantic model for the AgentCard payload
 

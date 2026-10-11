@@ -136,7 +136,7 @@ Two paths depending on whether you are consuming or contributing.
 uvx --from 'acap[mcp] @ git+https://github.com/ravikiran438/agent-consent-protocol.git@v0.1.0' acap-mcp
 uvx --from 'phala[mcp] @ git+https://github.com/ravikiran438/phala-protocol.git@v0.1.0' phala-mcp
 uvx --from 'nerve[mcp] @ git+https://github.com/ravikiran438/pratyahara-nerve.git@v0.1.0' nerve-mcp
-uvx --from 'pace[mcp] @ git+https://github.com/ravikiran438/sauvidya-pace.git@v0.1.0' pace-mcp
+uvx --from 'pace[mcp] @ git+https://github.com/ravikiran438/sauvidya-pace.git@v0.2.0' pace-mcp
 ```
 
 **For end users (persistent, into an existing venv):**
@@ -156,6 +156,12 @@ pip install -e '.[mcp]'
 
 Any of the three paths registers the appropriate `<name>-mcp` console
 script in the active Python environment.
+
+PACE v0.2.0 requires Python 3.14 and makes its time-window checks
+time-zone aware: an `AdaptiveInteractionContract` carries
+`interaction_rules.timezone`, and `validate_time_window` takes an ISO
+8601 `at` timestamp instead of `current_time_hhmm`. `uvx` fetches a
+matching Python when none is installed.
 
 ### VSCode MCP config
 
@@ -200,7 +206,7 @@ include the servers you need.
       "command": "uvx",
       "args": [
         "--from",
-        "pace[mcp] @ git+https://github.com/ravikiran438/sauvidya-pace.git@v0.1.0",
+        "pace[mcp] @ git+https://github.com/ravikiran438/sauvidya-pace.git@v0.2.0",
         "pace-mcp"
       ]
     }
@@ -248,6 +254,67 @@ response.
 
 See each server's `src/<package>/mcp_server/README.md` for the full
 tool schema and per-tool examples.
+
+## Testing Your Agent with a2a-testbed
+
+[a2a-testbed](https://github.com/ravikiran438/a2a-testbed) checks an
+agent from the outside, against the A2A specification and against these
+protocols' own MCP servers. It is on [PyPI](https://pypi.org/project/a2a-testbed/);
+every command below also runs without installing via `uvx a2a-testbed`.
+
+**A2A conformance of a running agent.** 62 contracts, each citing the
+A2A 1.0 section it checks (agents that only speak A2A 0.3 are probed in
+0.3):
+
+```bash
+uvx a2a-testbed conformance https://my-agent.example.com
+uvx a2a-testbed lint-card agent-card.json      # the card file alone, no server
+```
+
+**In CI.** The GitHub Action sweeps a preview deployment or an agent
+started in the job, lints the card, uploads SARIF to code scanning and
+fails the check on violations. Known failures go in a
+`.a2a-conformance.yaml` baseline, each with a reason:
+
+```yaml
+- uses: ravikiran438/a2a-testbed@v0
+  with:
+    url: ${{ steps.deploy.outputs.preview_url }}
+    card: agent-card.json
+```
+
+**Extension semantics in a scenario.** A scenario step can call a tool on
+an extension's MCP server and fail unless it returns the expected
+verdict: `ok` (`{"ok": true}`), `violation` (`{"ok": false}`) or
+`rejected` (an MCP error result, such as malformed input):
+
+```yaml
+mcp_delegates:
+  - uri: https://ravikiran438.github.io/sauvidya-pace/v1
+    command: [uvx, --from,
+              "pace[mcp] @ git+https://github.com/ravikiran438/sauvidya-pace.git@v0.2.0",
+              pace-mcp]
+
+flow:
+  - from: carol
+    to: alice
+    action: deliver
+    message: "deliver: follow-up call at 19:00"
+    expect:
+      response_status: "2xx"
+      extensions:
+        "https://ravikiran438.github.io/sauvidya-pace/v1":
+          tool: validate_time_window
+          args:
+            contract: {...}            # the principal's AdaptiveInteractionContract
+            at: "2026-10-12T19:00:00+05:30"
+          verdict: violation
+```
+
+Pin each server to a release tag, as above: an unpinned server runs
+whatever version is installed, and an old server gives old verdicts.
+Full guides: [CI](https://github.com/ravikiran438/a2a-testbed/blob/main/docs/ci.md)
+and [scenario expectations](https://github.com/ravikiran438/a2a-testbed/blob/main/docs/scenarios.md).
 
 ## Companion Repositories
 
